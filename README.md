@@ -107,26 +107,56 @@ const config = {
 - Technology 2
 - Technology 3
 
-## Contributing
+## 🤝 Contributing
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+We love your input! We want to make contributing as easy and transparent as possible.
 
-## License
+### Development Setup
+
+1. Fork the repo and create your branch from `main`
+2. Install dependencies: `npm install`
+3. Make your changes and add tests
+4. Ensure the test suite passes: `npm test`
+5. Format your code: `npm run format`
+6. Create a pull request!
+
+### Code of Conduct
+
+Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+
+### Reporting Issues
+
+- Use the issue tracker to report bugs
+- Include as much detail as possible
+- Provide steps to reproduce the issue
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
+## 👥 Contributors
 
-Your Name - your.email@example.com
+Thanks to all the amazing contributors who have helped make this project better!
 
-Project Link: [https://github.com/yourusername/your-repo-name](https://github.com/yourusername/your-repo-name)
+<a href="https://github.com/yourusername/your-repo-name/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=yourusername/your-repo-name" />
+</a>
 
-## Acknowledgments
+## 📞 Support & Contact
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- 📧 Email: your.email@example.com
+- 💬 Discord: [Join our community](https://discord.gg/yourserver)
+- 🐦 Twitter: [@yourhandle](https://twitter.com/yourhandle)
+- 📖 Documentation: [Read the docs](https://yourdocs.com)
+
+## 🙏 Acknowledgments
+
+- [Awesome Library](https://github.com/awesome/library) - For inspiration
+- [Great Tool](https://greattool.com) - Used in development
+- All our amazing contributors and users!
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/yourusername">Your Name</a>
+</div>
