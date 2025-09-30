@@ -1,4 +1,4 @@
-# ⚡ Elite Hacker Playground - Break Stuff, Win Fame! 💀
+# 🎯 BOUNTY HUNTERS WANTED - Million Dollar Bugs Await! 💰
 
 ## Our Commitment
 
