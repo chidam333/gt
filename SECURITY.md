@@ -1,4 +1,4 @@
-# Security Policy
+# 🛡️ Security & Vulnerability Disclosure
 
 ## Our Commitment
 
