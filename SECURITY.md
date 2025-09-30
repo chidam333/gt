@@ -1,4 +1,4 @@
-# Security Policy 2
+# 🔥 Security Arsenal - Hunt Bugs, Get Glory! 🏆
 
 ## Our Commitment
 
