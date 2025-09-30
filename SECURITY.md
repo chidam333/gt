@@ -1,4 +1,4 @@
-# ⚡ Elite Hacker Playground - Break Stuff, Win Fame! 💀
+# ⚡ Elite Hacker Playground - Break Stuff, Win Fame! 💀 ahsdjabsdjhbas 
 
 ## Our Commitment
 
