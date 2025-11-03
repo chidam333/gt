@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitLab - Project Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            background-color: #fafafa;
+            color: #303030;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background-color: #292961;
+            color: white;
+            padding: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 48px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 16px;
+            max-width: none;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .gitlab-logo {
+            font-weight: bold;
+            font-size: 18px;
+            color: #fc6d26;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 6px 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 14px;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 24px;
+            height: 24px;
+            background-color: #fc6d26;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 48px;
+            width: 240px;
+            height: calc(100vh - 48px);
+            background-color: #fafafa;
+            border-right: 1px solid #dbdbdb;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .project-header {
+            padding: 16px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        .project-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #303030;
+            margin-bottom: 4px;
+        }
+
+        .project-path {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .nav-item {
+            display: block;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            color: #303030;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-link:hover {
+            background-color: #f0f0f0;
+        }
+
+        .nav-link.active {
+            background-color: #1f75cb;
+            color: white;
+            font-weight: 500;
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 240px;
+            margin-top: 48px;
+            padding: 24px;
+            min-height: calc(100vh - 48px);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #1f75cb;
+            text-decoration: none;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 8px;
+            color: #999;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 400;
+            color: #303030;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            background-color: white;
+            color: #303030;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #f9f9f9;
+            border-color: #b3b3b3;
+        }
+
+        .btn-primary {
+            background-color: #1f75cb;
+            border-color: #1f75cb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1068bf;
+        }
+
+        /* File List */
+        .file-list {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .file-list-header {
+            background-color: #f9f9f9;
+            padding: 12px 16px;
+            border-bottom: 1px solid #dbdbdb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .commit-info {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .commit-link {
+            color: #1f75cb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+
+        .file-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+
+        .file-name {
+            flex: 1;
+            color: #1f75cb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .file-commit {
+            color: #666;
+            font-size: 13px;
+            margin-right: 16px;
+        }
+
+        .file-date {
+            color: #999;
+            font-size: 13px;
+            width: 100px;
+            text-align: right;
+        }
+
+        /* Stats Cards */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f75cb;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* README Section */
+        .readme-section {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            margin-top: 24px;
+        }
+
+        .readme-header {
+            padding: 12px 16px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #dbdbdb;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .readme-content {
+            padding: 16px;
+            line-height: 1.6;
+        }
+
+        .readme-content h1 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #303030;
+        }
+
+        .readme-content p {
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .readme-content code {
+            background-color: #f6f8fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .search-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="gitlab-logo">GitLab</div>
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search or jump to...">
+            </div>
+            <div class="user-section">
+                <div class="user-avatar">JD</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="project-header">
+            <div class="project-name">awesome-project</div>
+            <div class="project-path">john.doe / awesome-project</div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <span class="nav-icon">📁</span>
+                    Repository
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">🔍</span>
+                    Issues
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">🔄</span>
+                    Merge requests
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">🚀</span>
+                    CI/CD
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    Analytics
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">📋</span>
+                    Wiki
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">⚙️</span>
+                    Settings
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="#">awesome-project</a>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Repository</h1>
+            <div class="header-actions">
+                <button class="btn">Clone</button>
+                <button class="btn btn-primary">+ New file</button>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <span class="stat-number">42</span>
+                <div class="stat-label">Commits</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">3</span>
+                <div class="stat-label">Branches</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">12</span>
+                <div class="stat-label">Contributors</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">8</span>
+                <div class="stat-label">Releases</div>
+            </div>
+        </div>
+
+        <!-- File List -->
+        <div class="file-list">
+            <div class="file-list-header">
+                <div class="commit-info">
+                    Latest commit <a href="#" class="commit-link">feat: add new dashboard component</a> 2 hours ago
+                </div>
+                <div>
+                    <a href="#" class="commit-link">a1b2c3d</a>
+                </div>
+            </div>
+            <div class="file-item">
+                <span class="file-icon">📁</span>
+                <a href="#" class="file-name">.github</a>
+                <span class="file-commit">Initial commit</span>
+                <span class="file-date">3 days ago</span>
+            </div>
+            <div class="file-item">
+                <span class="file-icon">📁</span>
+                <a href="#" class="file-name">src</a>
+                <span class="file-commit">feat: add new dashboard component</span>
+                <span class="file-date">2 hours ago</span>
+            </div>
+            <div class="file-item">
+                <span class="file-icon">📁</span>
+                <a href="#" class="file-name">public</a>
+                <span class="file-commit">update: optimize images</span>
+                <span class="file-date">1 day ago</span>
+            </div>
+            <div class="file-item">
+                <span class="file-icon">📄</span>
+                <a href="#" class="file-name">.gitignore</a>
+                <span class="file-commit">Initial commit</span>
+                <span class="file-date">3 days ago</span>
+            </div>
+            <div class="file-item">
+                <span class="file-icon">📄</span>
+                <a href="#" class="file-name">package.json</a>
+                <span class="file-commit">deps: update dependencies</span>
+                <span class="file-date">1 day ago</span>
+            </div>
+            <div class="file-item">
+                <span class="file-icon">📄</span>
+                <a href="#" class="file-name">README.md</a>
+                <span class="file-commit">docs: update README with new features</span>
+                <span class="file-date">6 hours ago</span>
+            </div>
+        </div>
+
+        <!-- README Section -->
+        <div class="readme-section">
+            <div class="readme-header">README.md</div>
+            <div class="readme-content">
+                <h1>Awesome Project</h1>
+                <p>This is an awesome project that demonstrates modern web development practices using React, TypeScript, and other cutting-edge technologies.</p>
+                <p>To get started, clone this repository and run <code>npm install</code> to install dependencies.</p>
+                <p>Then run <code>npm start</code> to start the development server.</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

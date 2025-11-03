@@ -1,137 +1,68 @@
-# NexGen Code Catalyst
+# Project Title
 
 A brief description of what this project does and who it's for.
 
 ## Description
 
-Provide a more detailed description of your project. Explain what it does, why it exists, and what problems it solves. This section should give readers a clear understanding of your project's purpose and value.
+Provide a more detailed description of your project. Explain what it does, why it exists, and what problem it solves.
 
-## Features
+## Getting Started
 
-- Feature 1: Brief description
-- Feature 2: Brief description  
-- Feature 3: Brief description
-- Feature 4: Brief description
+### Dependencies
 
-## Installation
+* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
+* ex. Windows 10
 
-### Prerequisites
+### Installing
 
-Before you begin, ensure you have met the following requirements:
+* How/where to download your program
+* Any modifications needed to be made to files/folders
 
-- Node.js (version X.X or higher)
-- npm or yarn
-- Any other dependencies
-
-### Setup
-
-1. Clone the repository
-   ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   ```
-
-2. Navigate to the project directory
-   ```bash
-   cd your-repo-name
-   ```
-
-3. Install dependencies
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-4. Set up environment variables (if applicable)
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-## Usage
-
-### Basic Usage
-
-Explain how to use your project. Provide code examples:
-
-```javascript
-// Example code snippet
-const example = require('./your-module');
-example.doSomething();
+```
+code examples for installation
 ```
 
-### Advanced Usage
+### Executing program
 
-Provide more complex examples or configuration options:
+* How to run the program
+* Step-by-step bullets
 
-```javascript
-// More advanced example
-const config = {
-  option1: 'value1',
-  option2: 'value2'
-};
-example.configure(config);
+```
+code blocks for commands
 ```
 
-## API Reference
+## Help
 
-If your project has an API, document the main endpoints:
+Any advice for common problems or issues.
 
-### Endpoints
-
-#### GET /api/endpoint
-- **Description**: What this endpoint does
-- **Parameters**: 
-  - `param1` (string): Description of parameter
-  - `param2` (number, optional): Description of parameter
-- **Response**: Description of response format
-
-## Development
-
-### Running Locally
-
-```bash
-npm start
-# or
-yarn start
+```
+command to run if program contains helper info
 ```
 
-### Running Tests
+## Authors
 
-```bash
-npm test
-# or
-yarn test
-```
+Contributors names and contact info
 
-### Building for Production
+ex. Dominique Pizzie  
+ex. [@DomPizzie](https://twitter.com/dompizzie)
 
-```bash
-npm run build
-# or
-yarn build
-```
+## Version History
 
-## Contributing
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+* 0.2
+    * Various bug fixes and optimizations
+    * See [commit change]() or See [release history]()
+* 0.1
+    * Initial Release
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-Your Name - your.email@example.com
-
-Project Link: [https://github.com/yourusername/your-repo-name](https://github.com/yourusername/your-repo-name)
+This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration sources
-- Libraries or tools that were particularly helpful
+Inspiration, code snippets, etc.
+* [awesome-readme](https://github.com/matiassingers/awesome-readme)
+* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* [dbader](https://github.com/dbader/readme-template)
+* [zenorocha](https://gist.github.com/zenorocha/4526327)
+* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
